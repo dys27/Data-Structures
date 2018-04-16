@@ -7,5 +7,7 @@ class Queue:
         self.items.insert(0,item)
     def dequeue(self):
         return self.items.pop()
+    def peek(self):
+        return self.items[0]
     def size(self):
         return len(self.items)
