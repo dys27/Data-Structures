@@ -1,4 +1,5 @@
-/* Converts your website URL to tiny URL*/
+#Converts your website URL to tiny URL
+
 class TinyURL(object):
     i=0
     dictionary={}
