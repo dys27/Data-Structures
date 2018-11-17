@@ -1,5 +1,5 @@
 from __future__ import print_function
-class node(object):
+class Node(object):
     def __init__(self,data):
         self.data=data
         self.nextNode=None
