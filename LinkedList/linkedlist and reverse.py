@@ -1,90 +1,83 @@
-from __future__ import print_function
 class Node(object):
     def __init__(self,data):
         self.data=data
-        self.nextNode=None
+        self.next_node = None
 
-    def remove(self,data,previousNode):
-        if self.data==data:
-            previousNode.nextNode=self.nextNode
+    def remove(self,data,previous_node):
+        if self.data == data:
+            previous_node.next_node = self.next_node
             del self.data
-            del self.nextNode
+            del self.next_node
+            return True
         else:
-            if self.nextNode is not None:
-                self.nextNode.remove(data,self)
+            if self.next_node is not None:
+                return self.next_node.remove(data,self)
 
-class linkedList(object):
+class LinkedList(object):
     def __init__(self):
-        self.head=None
-        self.counter=0
-    #o(n)
-    def traverseList(self):
-        actualNode = self.head
+        self.head = None
+        self.counter = 0
 
-        while actualNode is not None:
-            print ("%d" %actualNode.data,end=" ")
-            actualNode=actualNode.nextNode
+    def traverse_list(self):
+        actual_node = self.head
+        while actual_node is not None:
+            print("%d" %actual_node.data,end=" ")
+            actual_node=actual_node.next_node
 
-    def insertStart(self,data):
-        
-        self.counter +=1
-        newNode=node(data)
-
+    def insert_start(self,data):
+        self.counter += 1
+        new_node = Node(data)
         if not self.head:
-            self.head=newNode
+            self.head=new_node
         else:
-            newNode.nextNode=self.head
-            self.head=newNode
-    #O(1)
+            new_node.next_node = self.head
+            self.head=new_node
+
     def size(self):
         return self.counter
 
-    def insertEnd(self,data):
-
+    def insert_end(self,data):
         if self.head is None:
-            self.insertStart(data)
+            self.insert_start(data)
             return
+        self.counter += 1
+        new_node = Node(data)
+        actual_node=self.head
+        while actual_node.next_node is not None:
+            actual_node=actual_node.next_node
+        actual_node.next_node = new_node
 
-        self.counter+=1
-            
-        newNode = node(data)
-        actualNode=self.head
-
-        while actualNode.nextNode is not None:
-            actualNode=actualNode.nextNode
-
-        actualNode.nextNode=newNode
-    #O(n)
     def remove(self,data):
-
-        self.counter-=1
         if self.head:
             if data==self.head.data:
-                self.head = self.head.nextNode
+                self.head=self.head.next_node
+                self.counter -= 1
             else:
-                self.head.remove(data,self.head)
+                if (self.head.remove(data,self.head)):
+                    self.counter -= 1
+
 
     def reverse(self):
-            actualNode=self.head
-            prevTemp=None
-            while actualNode is not None:
-                nextTemp=actualNode.nextNode
-                actualNode.nextNode=prevTemp
-                prevTemp=actualNode
-                actualNode=nextTemp
-            self.head=prevTemp
+        actual_node = self.head
+        prev_temp = None
+        while actual_node is not None:
+            next_temp = actual_node.next_node
+            actual_node.next_node = prev_temp
+            prev_temp =  actual_node
+            actual_node = next_temp
+        self.head=prev_temp
 
-linkedlist = linkedList()
-linkedlist.insertStart(12)
-linkedlist.insertStart(13)
-linkedlist.insertStart(14)
-linkedlist.insertStart(15)
+linked_list = LinkedList()
 
-linkedlist.traverseList()
-print (linkedlist.size())
-linkedlist.remove(12)
-linkedlist.traverseList()
-print (linkedlist.size())
+linked_list.insert_end(1)
+linked_list.insert_end(2)
+linked_list.insert_end(3)
+linked_list.insert_end(4)
+linked_list.insert_end(5)
+print(linked_list.size())
+linked_list.remove(3)
+print(linked_list.size())
+
 
                     
         
