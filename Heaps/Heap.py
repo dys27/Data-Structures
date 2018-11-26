@@ -1,21 +1,21 @@
 from heapq import heappush,heappop
-class heap(object):
+class Heap(object):
     def __init__(self):
         self.heap=[]
-    def insertKey(self,i): #inserts a key to the heap
+    def insert_key(self,i): #inserts a key to the heap
         heappush(self.heap,i)
     def parent(self,i):    #returns the parent of the heap
         return (i-1)/2
-    def extractMin(self):
+    def extract_min(self):
         return heappop(self.heap)
-    def deleteKey(self,i): #deletes a key from the heap
-        self.decreaseKey(i,float("-inf"))
-        self.extractMin()
-    def getMin(self):      #returns minimum element from the heap
+    def delete_key(self,i): #deletes a key from the heap
+        self.decrease_key(i,float("-inf"))
+        self.extract_min()
+    def get_min(self):      #returns minimum element from the heap
         return self.heap[0]
-    def printHeap(self):
+    def print_heap(self):
         return self.heap
-    def decreaseKey(self,i,new_val):
+    def decrease_key(self,i,new_val):
         self.heap[i]=new_val
         if i!=0 and self.heap[i]<self.heap[self.parent(i)]:
             self.heap[i],self.heap[self.parent(i)]=self.heap[self.parent(i)],self.heap[i]
