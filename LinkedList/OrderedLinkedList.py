@@ -13,7 +13,7 @@ class Node(object):
             if self.next_node is not None:
                 return self.next_node.remove(data,self)
 
-class LinkedList(object):
+class Linkedlist(object):
     def __init__(self):
         self.head = None
         self.counter = 0
@@ -70,7 +70,7 @@ class LinkedList(object):
             actual_node = next_temp
         self.head=prev_temp
 
-linked_list = LinkedList()
+linked_list = Linkedlist()
 
 linked_list.insert(5)
 linked_list.insert(6)
