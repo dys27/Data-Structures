@@ -2,16 +2,16 @@ from heapq import heappush,heappop
 class heap(object):
     def __init__(self):
         self.heap=[]
-    def insertKey(self,i):
+    def insertKey(self,i): #inserts a key to the heap
         heappush(self.heap,i)
-    def parent(self,i):
+    def parent(self,i):    #returns the parent of the heap
         return (i-1)/2
     def extractMin(self):
         return heappop(self.heap)
-    def deleteKey(self,i):
+    def deleteKey(self,i): #deletes a key from the heap
         self.decreaseKey(i,float("-inf"))
         self.extractMin()
-    def getMin(self):
+    def getMin(self):      #returns minimum element from the heap
         return self.heap[0]
     def printHeap(self):
         return self.heap
