@@ -1,172 +1,172 @@
-class node(object):
+class Node(object):
     count=0
     def __init__(self,data):
         self.data=data
-        self.leftChild=None
-        self.rightChild=None
+        self.left_child=None
+        self.right_child=None
         
     def insert(self,data):
         if data < self.data:
-            if not self.leftChild:
-                self.leftChild = node(data)
+            if not self.left_child:
+                self.left_child = Node(data)
             else:
-                self.leftChild.insert(data)
+                self.left_child.insert(data)
         else:
-            if not self.rightChild:
-                self.rightChild=node(data)
+            if not self.right_child:
+                self.right_child=Node(data)
             else:
-                self.rightChild.insert(data)
+                self.right_child.insert(data)
 
-    def remove(self,data,parentNode):
+    def remove(self,data,parent_node):
         if data<self.data:
-            if self.leftChild is not None:
-                self.leftChild.remove(data,self)
+            if self.left_child is not None:
+                self.left_child.remove(data,self)
         elif data>self.data:
-                if self.rightChild is not None:
-                    self.rightChild.remove(data,self)
+                if self.right_child is not None:
+                    self.right_child.remove(data,self)
         else:
-            if self.leftChild is not None and self.rightChild is not None:
-                self.data = self.rightChild.getMin()
-                self.rightChild.remove(self.data,self)
+            if self.left_child is not None and self.right_child is not None:
+                self.data = self.right_child.get_min()
+                self.right_child.remove(self.data,self)
                 
-            elif parentNode.leftChild == self:
-                if self.leftChild is not None:
-                    tempNode = self.leftChild
+            elif parent_node.left_child == self:
+                if self.left_child is not None:
+                    temp_node = self.left_child
                 else:
-                    tempNode = self.rightChild
-                parentNode.leftChild = tempNode
+                    temp_node = self.right_child
+                parent_node.left_child = temp_node
                     
-            elif parentNode.rightChild == self:
-                if self.leftChild is not None:
-                    tempNode = self.leftChild
+            elif parent_node.right_child == self:
+                if self.left_child is not None:
+                    temp_node = self.left_child
                 else:
-                    tempNode = self.rightChild
-                parentNode.rightChild = tempNode
+                    temp_node = self.right_child
+                parent_node.right_child = temp_node
 
-    def getMin(self):
-        if self.leftChild is None:
+    def get_min(self):
+        if self.left_child is None:
             return self.data 
         else:
-            return self.leftChild.getMin()
+            return self.left_child.get_min()
 
-    def getMax(self):
-        if self.rightChild is None:
+    def get_max(self):
+        if self.right_child is None:
             return self.data
         else:
-            return self.rightChild.getMax()
+            return self.right_child.get_max()
 
-    def traverseInOrder(self):
-        if self.leftChild is not None:
-            self.leftChild.traverseInOrder()
+    def traverse_in_order(self):
+        if self.left_child is not None:
+            self.left_child.traverse_in_order()
 
         print self.data,
 
-        if self.rightChild is not None:
-            self.rightChild.traverseInOrder()
+        if self.right_child is not None:
+            self.right_child.traverse_in_order()
 
-    def preOrder(self):
+    def pre_order(self):
         print self.data,
-        if self.leftChild is not None:
-            self.leftChild.preOrder()
-        if self.rightChild is not None:
-            self.rightChild.preOrder()
+        if self.left_child is not None:
+            self.left_child.pre_order()
+        if self.right_child is not None:
+            self.right_child.pre_order()
 
-    def postOrder(self):
-        if self.leftChild is not None:
-            self.leftChild.postOrder()
-        if self.rightChild is not None:
-            self.rightChild.postOrder()
+    def post_order(self):
+        if self.left_child is not None:
+            self.left_child.post_order()
+        if self.right_child is not None:
+            self.right_child.post_order()
         print self.data,
 
-    def levelOrder(self):
+    def level_order(self):
         queue=[self]
         while (len(queue)>0):
             print queue[0].data,
             n=queue.pop(0)
-            if n.leftChild is not None:
-                queue.append(n.leftChild)
-            if n.rightChild is not None:
-                queue.append(n.rightChild)
+            if n.left_child is not None:
+                queue.append(n.left_child)
+            if n.right_child is not None:
+                queue.append(n.right_child)
         
             
     def search(self,data):
         if self.data==data:
             #print self.data
-            node.count+=1
-            if self.rightChild is not None:
-                self.rightChild.search(data)
+            Node.count+=1
+            if self.right_child is not None:
+                self.right_child.search(data)
         elif data<self.data:
-            if self.leftChild is not None:
-                self.leftChild.search(data)
+            if self.left_cild is not None:
+                self.left_child.search(data)
     
         else:
-            if self.rightChild is not None:
-                self.rightChild.search(data)
-        return node.count
+            if self.right_child is not None:
+                self.right_child.search(data)
+        return Node.count
 
     def height(self):
-        if self.leftChild is not None and self.rightChild is not None:
-            return max(1+self.leftChild.height(),1+self.rightChild.height())
-        elif self.leftChild is not None:
-            return 1+self.leftChild.height()
-        elif self.rightChild is not None:
-            return 1+self.rightChild.height()
+        if self.left_child is not None and self.right_child is not None:
+            return max(1+self.left_child.height(),1+self.right_child.height())
+        elif self.left_child is not None:
+            return 1+self.left_child.height()
+        elif self.right_child is not None:
+            return 1+self.right_child.height()
         else:
             return 0
 
 class BST(object):
 
     def __init__(self):
-        self.rootNode = None
+        self.root_node = None
 
     def insert(self,data):
-        if not self.rootNode:
-            self.rootNode = node(data)
+        if not self.root_node:
+            self.root_node = Node(data)
         else:
-            self.rootNode.insert(data)
+            self.root_node.insert(data)
 
-    def remove(self,dataToRemove):
-        if self.rootNode:
-            if self.rootNode == dataToRemove:
-                tempNode = node(None)
-                tempNode.leftChild = self.rootNode
-                self.rootNode.remove(dataToRemove,tempNode)
+    def remove(self,data_to_remove):
+        if self.root_node:
+            if self.root_node == data_to_remove:
+                temp_node = Node(None)
+                temp_node.left_child = self.root_node
+                self.root_node.remove(data_to_remove,temp_node)
             else:
-                self.rootNode.remove(dataToRemove, None)
+                self.root_node.remove(data_to_remove, None)
 
-    def getMax(self):
-        if self.rootNode:
-            return self.rootNode.getMax()
+    def get_max(self):
+        if self.root_node:
+            return self.root_node.get_max()
 
-    def getMin(self):
-        if self.rootNode:
-            return self.rootNode.getMin()
+    def get_min(self):
+        if self.root_node:
+            return self.root_node.get_min()
         
-    def traverseInOrder(self):
-        if self.rootNode:
-            self.rootNode.traverseInOrder()
+    def traverse_in_order(self):
+        if self.root_node:
+            self.root_node.traverse_in_order()
 
-    def preOrder(self):
-        if self.rootNode:
-            self.rootNode.preOrder()
+    def pre_order(self):
+        if self.root_node:
+            self.root_node.pre_order()
 
-    def postOrder(self):
-        if self.rootNode:
-            self.rootNode.postOrder()
+    def post_order(self):
+        if self.root_node:
+            self.root_node.post_order()
             
-    def levelOrder(self):
-        if self.rootNode:
-            self.rootNode.levelOrder()
+    def level_order(self):
+        if self.root_node:
+            self.root_node.level_order()
             
     def search(self,data):
-        if self.rootNode:
-            print self.rootNode.search(data)
+        if self.root_node:
+            print self.root_node.search(data)
         else:
             print "not found"
 
     def height(self):
-        if self.rootNode:
-            return self.rootNode.height()
+        if self.root_node:
+            return self.root_node.height()
 
 bst=BST()
 
@@ -178,13 +178,13 @@ bst.insert(4)
 #bst.insert(4)
 
 #bst.search(-2)
-#bst.traverseInOrder()
-#print bst.getMax()
-#print bst.getMin()
-#bst.preOrder()
-#bst.postOrder()
-#bst.traverseInOrder()
-#bst.levelOrder()
+#bst.traverse_in_order()
+#print bst.get_max()
+#print bst.get_min()
+#bst.pre_order()
+#bst.post_order()
+#bst.traverse_in_order()
+#bst.level_order()
 print bst.height()
 
 
