@@ -1,76 +1,76 @@
-class node(object):
+class Node(object):
     def __init__(self,data):
         self.data=data
-        self.nextNode=None
-    def remove(self,data,previousNode):
+        self.next_node=None
+    def remove(self,data,previous_node):
         if self.data==data:
-            previousNode.nextNode=self.nextNode
+            previous_node.next_node=self.next_node
             del self.data
-            del self.nextNode
+            del self.next_node
         else:
-            if self.nextNode is not None:
-                self.nextNode.remove(data,self)
-class linkedlist(object):
+            if self.next_node is not None:
+                self.next_node.remove(data,self)
+class LinkedList(object):
     def __init__(self):
         self.head=None
         self.counter=0
-    def addFirst(self,data):
+    def add_first(self,data):
         self.counter+=1
-        newNode=node(data)
+        new_node=node(data)
         if self.head is None:
-            self.head=newNode
+            self.head=new_node
         else:
-            newNode.nextNode=self.head
-            self.head=newNode
+            new_node.next_node=self.head
+            self.head=new_node
 
-    def addLast(self,data):
+    def add_last(self,data):
         if self.head is None:
-            self.addFirst(data)
+            self.add_first(data)
             return
         self.counter+=1
-        newNode=node(data)
-        currentNode=self.head
-        while currentNode.nextNode is not None:
-            currentNode=currentNode.nextNode
-        currentNode.nextNode=newNode
+        new_node=node(data)
+        current_node=self.head
+        while current_node.next_node is not None:
+            current_node=current_node.next_node
+        current_node.next_node=new_node
 
     def size(self):
         return self.counter
 
     def traverse(self):
-        currentNode=self.head
-        while currentNode is not None:
-            print "%d"%currentNode.data,
-            currentNode=currentNode.nextNode
+        current_node=self.head
+        while current_node is not None:
+            print "%d"%current_node.data,
+            current_node=current_node.next_node
 
     def remove(self,data):
         self.counter-=1
         if self.head:
             if self.head.data==data:
-                self.head=self.head.nextNode
+                self.head=self.head.next_node
             else:
                 self.head.remove(data,self.head)
                 
     def partition(self,part):
-        l2=linkedlist()
-        l3=linkedlist()
-        l4=linkedlist()
-        currentNode=self.head
+        l2=LinkedList()
+        l3=LinkedList()
+        l4=LinkedList()
+        current_node=self.head
         
-        while currentNode is not None:
-            if currentNode.data<part:
-                l2.addFirst(currentNode.data)
-                currentNode=currentNode.nextNode
+        while current_node is not None:
+            if current_node.data<part:
+                l2.add_first(current_node.data)
+                current_node=current_node.next_node
             else:
-                l3.addFirst(currentNode.data)
-                currentNode=currentNode.nextNode
+                l3.add_first(current_node.data)
+                current_node=current_node.next_node
         l2.traverse()
         l3.traverse()
         
-ll=linkedlist()
-ll.addFirst(6)
-ll.addFirst(5)
-ll.addFirst(4)
-ll.addFirst(3)
-ll.addFirst(2)
+ll=LinkedList()
+ll.add_first(6)
+ll.add_first(5)
+ll.add_first(4)
+ll.add_first(3)
+ll.add_first(2)
 ll.partition(4)
