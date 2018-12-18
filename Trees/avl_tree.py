@@ -7,7 +7,7 @@ class Node:
         self.left=None
         self.height=1
 
-def rotateRight(y):
+def rotate_right(y):
     x=y.left
     T2=x.right
     x.right=y
@@ -16,7 +16,7 @@ def rotateRight(y):
     x.height=max(height(x.left),height(x.right))+1
     return x
 
-def rotateLeft(x):
+def rotate_left(x):
     y=x.right
     T2=y.left
     y.left =x
@@ -41,7 +41,7 @@ def height(current):
         return 0
     return current.height
 
-def makeRoot(key):
+def make_root(key):
     return Node(key)
 
 #def newNode(key):
@@ -59,40 +59,40 @@ def insert(current,key):
 
     #left left
     if balance > 1 and key < current.left.key:
-        return rotateRight(current)
+        return rotate_right(current)
 
     #right right
     if balance < -1 and key > current.right.key:
-        return rotateLeft(current)
+        return rotate_left(current)
 
     #left right
     if balance > 1 and key > current.left.key:
-        current.left=rotateLeft(current.left)
-        return rotateRight(current)
+        current.left=rotate_left(current.left)
+        return rotate_right(current)
 
     #right left
     if balance < -1 and key < current.right.key:
-        current.right=rotateRight(current.right)
-        return rotateLeft(current)
+        current.right=rotate_right(current.right)
+        return rotate_left(current)
 
     return current
 
-def preOrder(temp):
+def pre_order(temp):
     if temp!=None:
         print temp.key," ",temp.height, " ",Balance(temp)
-        preOrder(temp.left)
-        preOrder(temp.right)
+        pre_order(temp.left)
+        pre_order(temp.right)
 
 def main():
     import random
-    root=makeRoot(10)
+    root=make_root(10)
     #root=insert(root,20)
     #root=insert(root,30)
     #root=insert(root,40)
     for x in range(5):
         root=insert(root, random.randint(0,100))
     print root.key
-    preOrder(root)
+    pre_order(root)
 
 if __name__=="__main__":
     main()
