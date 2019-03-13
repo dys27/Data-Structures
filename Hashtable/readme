@@ -1,0 +1,1 @@
+A program to implement hashtable. Hashfunction is calculated as key%size. Size chosen for this program is 11.
